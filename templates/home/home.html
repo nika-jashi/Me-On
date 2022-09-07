@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+    <head>
+        <title>Find - Me</title>
+
+    <body>
+
+    <h1>Find - Me</h1>
+    <h2>Welcome To Our Site</h2>
+    {% if user.is_authenticated %}
+        <a href="{% url 'account_profile' link_username %}">Your Profile</a>
+    {% endif %}
+
+
+    </body>
+{% endblock content %}

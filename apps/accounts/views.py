@@ -44,7 +44,7 @@ class AccountAuthenticationView(View):
 
             if user:
                 login(request, user)
-                return redirect('registration')
+                return redirect('home')
 
         else:
             return render(request, self.template_name, self.context_object)

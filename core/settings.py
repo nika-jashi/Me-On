@@ -19,6 +19,7 @@ ALLOWED_HOSTS = []
 
 PROJECT_APPS = [
     'apps.accounts.apps.AccountsConfig',
+    'apps.profiles.apps.ProfilesConfig',
 ]
 
 INSTALLED_APPS = [
@@ -112,3 +113,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'accounts.CustomAccount'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
