@@ -25,8 +25,8 @@ def contains_digits(password: str) -> None:
         )
 
 
-def contains_special_symbols(password: str) -> None:
-    if not re.search(r"[!@#$%^&*\-_=+.,]", password):
+def does_not_contains_special_symbols(username: str) -> None:
+    if re.search(r"[!@#$%^&*\-_=+.,]", username):
         raise ValidationError(
             _("This field must contain at least one special character like: ! @ # $ % ^ & * _ + =")
         )
