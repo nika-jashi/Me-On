@@ -11,10 +11,11 @@ class SocialLink(models.Model):
 
 
 class Profile(models.Model):
-    social_media_link = models.ForeignKey(to=SocialLink, on_delete=models.CASCADE, blank=True, null=True)
+    social_media_link = models.ForeignKey(to=SocialLink, on_delete=models.CASCADE, blank=True,null=True)
     account = models.OneToOneField(to=CustomAccount, on_delete=models.CASCADE)
-    head_name = models.CharField(max_length=54)
-    profile_picture = models.ImageField(upload_to='media/profile_images', blank=True, null=True)
+    full_name = models.CharField(max_length=54, blank=True)
+    small_bio = models.CharField(max_length=140, blank=True)
+    profile_picture = models.ImageField(upload_to='media/profile_images', blank=True)
 
     def __str__(self):
         return self.account.username

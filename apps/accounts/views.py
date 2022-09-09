@@ -25,7 +25,6 @@ class AccountRegistrationView(View):
 
 
 class AccountAuthenticationView(View):
-
     template_name = 'account/account_login.html'
     context_object = {"form": AccountAuthenticationForm}
 
@@ -51,7 +50,6 @@ class AccountAuthenticationView(View):
 
 
 class AccountLogoutView(View):
-
     template_name = 'account/account_logout.html'
 
     def get(self, request):

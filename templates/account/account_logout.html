@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+        <title>Find Me - Log Out</title>
     <div class="container">
 
         <div class="card shadow-sm">
@@ -13,7 +14,9 @@
                 <a class="btn btn-info float-right"
                    href="{% url 'login' %}">Log In Here</a>
             </div>
-        </div>
-    </div>
+                </div>
+                <a class="btn btn-info float-right"
+                   href="{% url 'home' %}">Home Page</a>
+            </div>
 
 {% endblock content %}

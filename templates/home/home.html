@@ -1,16 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
-    <head>
-        <title>Find - Me</title>
-
+    <title>Find-Me</title>
     <body>
-
     <h1>Find - Me</h1>
     <h2>Welcome To Our Site</h2>
     {% if user.is_authenticated %}
-        <a href="{% url 'account_profile' link_username %}">Your Profile</a>
+        <a href="{% url 'logout' %}">Log Out</a>
     {% endif %}
-
-
+    {% if not user.is_authenticated %}
+        <p>Have An Account? </p>
+        <a href="{% url 'login' %}">Log In</a>
+        <p>Does Not Have An Account? </p>
+        <a href="{% url 'registration' %}">Register</a>
+    {% endif %}
     </body>
 {% endblock content %}
