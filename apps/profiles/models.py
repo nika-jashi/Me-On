@@ -5,13 +5,13 @@ from apps.accounts.models import CustomAccount
 class SocialLink(models.Model):
     name = models.CharField(max_length=54)
     link = models.URLField(max_length=1000)
+    link_owner = models.ForeignKey(to=CustomAccount, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
 
 
 class Profile(models.Model):
-    social_media_link = models.ForeignKey(to=SocialLink, on_delete=models.CASCADE, blank=True,null=True)
     account = models.OneToOneField(to=CustomAccount, on_delete=models.CASCADE)
     full_name = models.CharField(max_length=54, blank=True)
     small_bio = models.CharField(max_length=140, blank=True)

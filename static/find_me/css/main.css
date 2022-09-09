@@ -1,0 +1,16 @@
+body {
+  width: 50%;
+  margin: 0 auto;
+  font-size: 1.3rem;
+  font-family: sans-serif;
+}
+
+p {
+  line-height: 1.4;
+}
+
+a {
+  outline: none;
+  text-decoration: none;
+  padding: 2px 1px 0;
+}
