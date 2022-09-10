@@ -1,5 +1,5 @@
 body {
-  width: 50%;
+  width: 75%;
   margin: 0 auto;
   font-size: 1.3rem;
   font-family: sans-serif;
@@ -13,4 +13,21 @@ a {
   outline: none;
   text-decoration: none;
   padding: 2px 1px 0;
+}
+
+
+.card {
+  /* Add shadows to create the "card" effect */
+  box-shadow: 2px 6px 10px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+
+/* On mouse-over, add a deeper shadow */
+.card:hover {
+  box-shadow: 3px 10px 18px 0 rgba(0,0,0,0.2);
+}
+
+/* Add some padding inside the card container */
+.container {
+  padding: 2px 16px;
 }

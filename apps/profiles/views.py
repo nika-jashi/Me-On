@@ -1,7 +1,5 @@
 from django.shortcuts import render, redirect
-from django.urls import reverse, reverse_lazy
 from django.views import View
-from django.urls import resolve
 
 from apps.accounts.models import CustomAccount
 from apps.profiles.forms import ProfileCustomisationForm, LinkCustomisationForm
@@ -14,15 +12,9 @@ class AccountProfileView(View):
         accounts_profile_name = CustomAccount.objects.filter(username=accounts_page_name).exists()
         accounts_profile = Profile.objects.filter(account__username=accounts_page_name).first()
         accounts_links = SocialLink.objects.filter(link_owner__username=accounts_page_name).values_list()
-        links = []
-        link_names = []
-        for item in accounts_links:
-            links.append(item[2])
-            link_names.append(item[1])
         context = {'accounts_profile': accounts_profile,
-                   'accounts_links': accounts_links,
-                   'links': links,
-                   'link_names': link_names}
+                   'accounts_links': accounts_links
+                   }
         if not accounts_profile_name:
             return redirect('home')
         else:
