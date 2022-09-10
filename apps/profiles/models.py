@@ -1,4 +1,6 @@
 from django.db import models
+from django.urls import reverse
+
 from apps.accounts.models import CustomAccount
 
 
@@ -14,8 +16,8 @@ class SocialLink(models.Model):
 class Profile(models.Model):
     account = models.OneToOneField(to=CustomAccount, on_delete=models.CASCADE)
     full_name = models.CharField(max_length=54, blank=True)
-    small_bio = models.CharField(max_length=140, blank=True)
-    profile_picture = models.ImageField(upload_to='media/profile_images', blank=True)
+    small_bio = models.TextField(max_length=140, blank=True)
+    profile_picture = models.ImageField(upload_to='media/', blank=True)
 
     def __str__(self):
         return self.account.username

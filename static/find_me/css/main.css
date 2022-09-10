@@ -29,5 +29,32 @@ a {
 
 /* Add some padding inside the card container */
 .container {
-  padding: 2px 16px;
+  padding: 4px 16px;
+}
+
+.button_update {
+  background-color: white;
+  color: black;
+  border: 2px solid #8cf590;
+}
+
+.button_update:hover {
+  background-color: #8cf590;
+  color: white;
+}
+
+.button_delete {
+  background-color: white;
+  color: black;
+  border: 2px solid #f58c8c;
+}
+
+.button_delete:hover {
+  background-color: #f58c8c;
+  color: white;
+}
+
+.footer{
+  position: center;
+  margin-bottom: 70%;
 }

@@ -3,18 +3,19 @@ from apps.profiles.models import Profile, SocialLink
 
 
 class ProfileCustomisationForm(forms.ModelForm):
-    small_bio = forms.CharField(max_length=140, help_text="Piece Of Information About You", required=False)
+    small_bio = forms.CharField(max_length=140, help_text="Piece Of Information About You", widget=forms.Textarea,
+                                required=False)
     full_name = forms.CharField(max_length=54, help_text="Put Your Real Name If You Want", required=False)
-    profile_picture = forms.ImageField(required=False)
+    profile_picture = forms.ImageField(help_text="upload Your Profile Photo", required=False)
 
     class Meta:
         model = Profile
-        fields = ('small_bio', 'profile_picture', 'full_name')
+        fields = ('full_name', 'small_bio', 'profile_picture')
 
 
 class LinkCustomisationForm(forms.ModelForm):
-    name = forms.CharField(max_length=54, help_text="name of the site", required=True)
-    link = forms.URLField(max_length=100, help_text="Input URL Here", required=True)
+    name = forms.CharField(max_length=54, help_text="Input Name Of The Site Or Indicator For URL")
+    link = forms.URLField(max_length=100, help_text="Input URL Here")
 
     class Meta:
         model = SocialLink

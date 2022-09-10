@@ -11,16 +11,26 @@
         <h3>Social Media Links</h3>
         {% for item in accounts_links.values_list %}
             <div class="container">
-                <a target="_blank" href="{{ item.2 }}">{{ item.1 }}</a>
+                <a class="a_hover a_selected a_visited a_unvisited" target="_blank" href="{{ item.2 }}">{{ item.1 }}</a>
             </div>
-
+            <div>
+                {% if user.username == accounts_profile.account.username %}
+                    <a class="button_update" href="edit-link/{{ item.0 }}">Update</a>
+                    <a class="button_delete" href="delete-link/{{ item.0 }}">Delete</a>
+                {% endif %}
+            </div>
         {% endfor %}
         <br>
     </div>
     <div>
-    {% if user.username == accounts_profile.account.username %}
-        <a class="btn btn-outline-info" href="edit/">Edit Profile</a>
-        <a class="btn btn-outline-info" href="add-link/">Add link</a>
-    {% endif %}
+        {% if user.username == accounts_profile.account.username %}
+            <a class="btn btn-outline-info" href="edit-profile/">Edit Profile</a>
+            <a class="btn btn-outline-info" href="add-link/">Add link</a>
+        {% endif %}
     </div>
+    <div>
+    {% if user.is_authenticated %}
+    <a class="footer" href="{% url 'logout' %}">Log out</a>
+    </div>
+    {% endif %}
 {% endblock content %}

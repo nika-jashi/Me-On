@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-check">
+            <label for="delete">Yes Delete</label>
+            <input class="form-check-input" type="submit" name="delete" id="delete" value="delete"/>
+            <div class="form-check">
+                <label for="no">No Take Me Back</label>
+                <input class="form-check-input" type="submit" name="no" id="no" value="no"/>
+            </div>
+        </div>
+    </form>
+{% endblock content %}

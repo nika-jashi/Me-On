@@ -1,22 +1,19 @@
 {% extends "base.html" %}
 {% block content %}
-        <title>Find Me - Log Out</title>
+    <title>Find Me - Log Out</title>
     <div class="container">
-
-        <div class="card shadow-sm">
-
-            <h4 class="card-header">Successful Logout</h4>
-
-            <div class="card-body">
+        <div>
+            <h4 class="">Successful Logout</h4>
+            <div>
                 <div class="alert alert-success text-dark text-center">
                     You have successfully logged out. <br>
                 </div>
                 <a class="btn btn-info float-right"
                    href="{% url 'login' %}">Log In Here</a>
             </div>
-                </div>
-                <a class="btn btn-info float-right"
-                   href="{% url 'home' %}">Home Page</a>
-            </div>
+        </div>
+        <a class="btn btn-info float-right"
+           href="{% url 'home' %}">Home Page</a>
+    </div>
 
 {% endblock content %}
