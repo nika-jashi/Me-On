@@ -1,4 +1,7 @@
+import re
+
 from django import forms
+
 from apps.profiles.models import Profile, SocialLink
 
 
@@ -20,3 +23,8 @@ class LinkCustomisationForm(forms.ModelForm):
     class Meta:
         model = SocialLink
         fields = ('name', 'link')
+
+    def clean(self):
+        name = self.cleaned_data['name']
+        if not re.search(r'([\w !#%()-=&~])', name):
+            raise forms.ValidationError('Please Provide Valid Name (Description)')

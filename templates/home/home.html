@@ -6,6 +6,7 @@
     <h2>Welcome To Our Site</h2>
     {% if user.is_authenticated %}
         <a href="{% url 'logout' %}">Log Out</a>
+        <a href="{{ user.username }}/">Profile</a>
     {% endif %}
     {% if not user.is_authenticated %}
         <p>Have An Account? </p>

@@ -23,11 +23,7 @@ class AccountProfileView(View):
 
 class Home(View):
     def get(self, request, *args, **kwargs):
-        link_username = request.user.username
-        if request.user.is_authenticated:
-            return redirect(f'{link_username}/')
-        else:
-            return render(request, 'home/home.html')
+        return render(request, 'home/home.html')
 
 
 class ProfileCustomisationView(View):
@@ -38,7 +34,7 @@ class ProfileCustomisationView(View):
         accounts_page_name = self.kwargs['username']
         current_account = request.user.username
         if not accounts_page_name == current_account:
-            return redirect('home')
+            return redirect(f'/{request.user.username}/')
         return render(request, self.template_name, self.context_object)
 
     def post(self, request, *args, **kwargs):
@@ -54,14 +50,14 @@ class ProfileCustomisationView(View):
 
 class SocialLinkCustomisationView(View):
     template_name = 'profile/profile_link_add.html'
-    context_object = {"form": LinkCustomisationForm()}
 
     def get(self, request, *args, **kwargs):
         accounts_page_name = self.kwargs['username']
         current_account = request.user.username
+        form = LinkCustomisationForm()
         if not accounts_page_name == current_account:
             return redirect('home')
-        return render(request, self.template_name, self.context_object)
+        return render(request, self.template_name, {'form': form})
 
     def post(self, request, *args, **kwargs):
         form = LinkCustomisationForm(request.POST)
@@ -73,7 +69,7 @@ class SocialLinkCustomisationView(View):
 
             return redirect('/')
         else:
-            return render(request, self.template_name, self.context_object)
+            return render(request, self.template_name, {'form': form})
 
 
 class SocialLinkUpdateView(View):
@@ -86,9 +82,9 @@ class SocialLinkUpdateView(View):
         current_account = request.user.username
         existing_pk = SocialLink.objects.filter(pk=current_link_pk).exists()
         if accounts_page_name != current_account:
-            return redirect('home')
+            return redirect(f'/{request.user.username}/')
         elif not existing_pk:
-            return redirect('home')
+            return redirect(f'/{request.user.username}/')
         else:
             return render(request, self.template_name, self.context_object)
 
@@ -114,9 +110,9 @@ class SocialLinkDeleteView(View):
         current_account = request.user.username
         existing_pk = SocialLink.objects.filter(pk=current_link_pk).exists()
         if accounts_page_name != current_account:
-            return redirect('home')
+            return redirect(f'/{request.user.username}/')
         elif not existing_pk:
-            return redirect('home')
+            return redirect(f'/{request.user.username}/')
         else:
             return render(request, self.template_name)
 
@@ -125,7 +121,7 @@ class SocialLinkDeleteView(View):
         if accounts_page_name == request.user.username:
             if request.POST.get('delete') == "delete":
                 SocialLink.objects.filter(pk=self.kwargs['pk']).delete()
-                return redirect('home')
+                return redirect(f'/{request.user.username}/')
             elif request.POST.get('no') == 'no':
-                return redirect('home')
+                return redirect(f'/{request.user.username}/')
         return render(request, self.template_name)
