@@ -7,10 +7,10 @@ from apps.accounts.forms import AccountRegistrationForm, AccountAuthenticationFo
 
 class AccountRegistrationView(View):
     template_name = 'account/account_registration.html'
-    context_object = {"form": AccountRegistrationForm()}
 
     def get(self, request):
-        return render(request, self.template_name, self.context_object)
+        form = AccountRegistrationForm()
+        return render(request, self.template_name, {'form': form})
 
     def post(self, request, *args, **kwargs):
 
@@ -21,15 +21,15 @@ class AccountRegistrationView(View):
             return redirect('login')
 
         else:
-            return render(request, self.template_name, self.context_object)
+            return render(request, self.template_name, {'form': form})
 
 
 class AccountAuthenticationView(View):
     template_name = 'account/account_login.html'
-    context_object = {"form": AccountAuthenticationForm}
 
     def get(self, request, *args, **kwargs):
-        return render(request, self.template_name, self.context_object)
+        form = AccountAuthenticationForm()
+        return render(request, self.template_name, {'form': form})
 
     def post(self, request, *args, **kwargs):
 
@@ -46,12 +46,13 @@ class AccountAuthenticationView(View):
                 return redirect('home')
 
         else:
-            return render(request, self.template_name, self.context_object)
+            return render(request, self.template_name, {'form': form})
 
 
 class AccountLogoutView(View):
     template_name = 'account/account_logout.html'
 
     def get(self, request):
-        logout(request)
-        return render(request, self.template_name)
+        if request.user.is_authenticated:
+            logout(request)
+            return render(request, self.template_name)

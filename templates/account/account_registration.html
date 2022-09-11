@@ -1,13 +1,26 @@
 {% extends "base.html" %}
 {% block content %}
     <title>Find Me - Registration</title>
-    <div class="content-section errors">
+    <div class="content-section">
         <form method="POST">
             {% csrf_token %}
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Join Today</legend>
-                {{ form.as_p }}
+                <p>Email: {{ form.email }}</p>
+                <p>Username: {{ form.username }}</p>
+                {% if form.username.errors %}
+                    {{ form.username.errors }}
+                {% endif %}
+                <p>Password: {{ form.password }}</p>
+                {% if form.password.errors %}
+                    {{ form.password.errors }}
+                {% endif %}
+                <p>Confirm Password: {{ form.password_confirm }}</p>
             </fieldset>
+            {% if form.non_field_errors %}
+                <div class="col-md-6 p-2 text-danger">{{ form.non_field_errors }}</div>
+            {% endif %}
+
             <div class="form-group">
                 <button class="btn btn-outline-info" type="submit">Sign Up</button>
             </div>
