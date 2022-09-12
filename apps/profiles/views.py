@@ -67,7 +67,7 @@ class SocialLinkCustomisationView(View):
             social_link_form.link_owner = link_owner_account
             social_link_form.save()
 
-            return redirect('/')
+            return redirect(f'/{request.user.username}/')
         else:
             return render(request, self.template_name, {'form': form})
 

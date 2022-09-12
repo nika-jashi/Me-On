@@ -1,34 +1,40 @@
 {% extends "base.html" %}
 {% block content %}
     <title>Find Me - Registration</title>
-    <div class="content-section">
+    <div class="centered container custom_card">
         <form method="POST">
             {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Join Today</legend>
-                <p>Email: {{ form.email }}</p>
-                <p>Username: {{ form.username }}</p>
+            <h2>Registration</h2>
+            <div class="centered">
+                <p style="margin: 8px">Email:</p>
+                {{ form.email }}
+                {% if form.email.errors %}
+                    {{ form.email.errors }}
+                {% endif %}
+                <p style="margin: 8px">Username:</p>
+                {{ form.username }}
                 {% if form.username.errors %}
                     {{ form.username.errors }}
                 {% endif %}
-                <p>Password: {{ form.password }}</p>
+                <p style="margin: 8px">Password:</p>
+                {{ form.password }}
                 {% if form.password.errors %}
                     {{ form.password.errors }}
                 {% endif %}
-                <p>Confirm Password: {{ form.password_confirm }}</p>
-            </fieldset>
-            {% if form.non_field_errors %}
-                <div class="col-md-6 p-2 text-danger">{{ form.non_field_errors }}</div>
-            {% endif %}
-
-            <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Sign Up</button>
+                <p style="margin: 8px">Confirm Password:</p>
+                {{ form.password_confirm }}
+                {% if form.non_field_errors %}
+                    <div>{{ form.non_field_errors }}</div>
+                {% endif %}
+            </div>
+            <div class="wrapper">
+                <button class="regular_button" type="submit">Sign Up</button>
             </div>
         </form>
-        <div class="border-top pt-3">
-            <small class="text-muted">
-                Already Have An Account? <a class="ml-2" href="{% url 'login' %}">Sign In</a>
-            </small>
-        </div>
+    </div>
+    <div class="centered" style="margin: 1%">
+        <small class="text-muted">
+            Already Have An Account? <a class="ml-2" href="{% url 'login' %}">Sign In</a>
+        </small>
     </div>
 {% endblock content %}
