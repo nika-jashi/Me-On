@@ -12,14 +12,13 @@
         <h1 class="navigation_h1">Find Me</h1>
         <ul class="navigation_ul">
             <li class="navigation_li">
-                <a class="navigation_a" href="{% url 'home' %}">Home Page</a>
-
+                <a class="navigation_a" href="{% url 'home' %}">Home Page </a>
                 {% if user.is_authenticated %}
-                    <a class="navigation_a" href="{% url 'account_profile' user.username %}">Profile</a>
+                    <a class="navigation_a" href="{% url 'account_profile' user.username %}">Profile </a>
                     <a class="navigation_a" href="{% url 'logout' %}">Log Out</a>
                 {% endif %}
                 {% if not user.is_authenticated %}
-                    <a class="navigation_a" href="{% url 'login' %}">Log In</a>
+                    <a class="navigation_a" href="{% url 'login' %}">Log In </a>
                     <a class="navigation_a" href="{% url 'registration' %}">Registration</a>
                 {% endif %}
             </li>

@@ -6,9 +6,11 @@ from apps.profiles.models import Profile, SocialLink
 
 
 class ProfileCustomisationForm(forms.ModelForm):
-    small_bio = forms.CharField(max_length=140, help_text="Piece Of Information About You", widget=forms.Textarea,
+    small_bio = forms.CharField(max_length=140, help_text="Piece Of Information About You",
+                                widget=forms.Textarea(attrs={'class': 'text_input'}),
                                 required=False)
-    full_name = forms.CharField(max_length=54, help_text="Put Your Real Name If You Want", required=False)
+    full_name = forms.CharField(max_length=54, help_text="Put Your Real Name If You Want", required=False,
+                                widget=forms.TextInput(attrs={'class': 'text_input'}))
     profile_picture = forms.ImageField(help_text="upload Your Profile Photo", required=False)
 
     class Meta:
@@ -17,8 +19,11 @@ class ProfileCustomisationForm(forms.ModelForm):
 
 
 class LinkCustomisationForm(forms.ModelForm):
-    name = forms.CharField(max_length=54, help_text="Input Name Of The Site Or Indicator For URL")
-    link = forms.URLField(max_length=100, help_text="Input URL Here")
+    name = forms.CharField(
+        max_length=54,
+        help_text="Input Name Of The Site Or Indicator For URL", widget=forms.TextInput(attrs={'class': 'text_input'}))
+    link = forms.URLField(max_length=100, help_text="Input URL Here",
+                          widget=forms.TextInput(attrs={'class': 'text_input'}))
 
     class Meta:
         model = SocialLink

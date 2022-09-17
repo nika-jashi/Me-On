@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <div class="form-group">
-            <button class="btn btn-outline-info" type="submit">Update</button>
+            <button class="regular_button" type="submit">Update Profile</button>
         </div>
     </form>
 {% endblock content %}
