@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate
 from apps.accounts.models import CustomAccount
 from apps.utils.custom_validators import (contains_lowercase,
                                           contains_uppercase,
-                                          contains_digits, )
+                                          contains_digits)
 
 
 class AccountRegistrationForm(forms.ModelForm):
@@ -14,15 +14,17 @@ class AccountRegistrationForm(forms.ModelForm):
     fields, plus a repeated password. """
 
     password = forms.CharField(label='Password',
-                               widget=forms.PasswordInput,
+                               widget=forms.PasswordInput(attrs={'class': 'text_input', 'placeholder': 'Password'}),
                                validators=[contains_uppercase,
                                            contains_digits,
                                            contains_lowercase],
                                required=True)
     password_confirm = forms.CharField(label='Password confirmation',
-                                       widget=forms.PasswordInput,
+                                       widget=forms.PasswordInput(
+                                           attrs={'class': 'text_input', 'placeholder': 'Confirm Password'}),
                                        required=True)
-    username = forms.CharField()
+    username = forms.CharField(widget=forms.TextInput(attrs={'class': 'text_input', 'placeholder': 'Username'}))
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'text_input', 'placeholder': 'Email'}))
 
     class Meta:
         model = CustomAccount
@@ -59,7 +61,10 @@ class AccountRegistrationForm(forms.ModelForm):
 
 
 class AccountAuthenticationForm(forms.ModelForm):
-    password = forms.CharField(label='Password', widget=forms.PasswordInput)
+    password = forms.CharField(label='Password',
+                               widget=forms.PasswordInput(attrs={'class': 'text_input', 'placeholder': 'Password'})
+                               )
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'text_input', 'placeholder': 'Email'}))
 
     class Meta:
         model = CustomAccount
@@ -72,6 +77,7 @@ class AccountAuthenticationForm(forms.ModelForm):
             taken_email = CustomAccount.objects.filter(email=self.cleaned_data['email']).exists()
             if not taken_email:
                 if not authenticate(email=email):
-                    raise forms.ValidationError("Please Provide Valid Email")
-            if not authenticate(email=email, password=password):
-                raise forms.ValidationError("password is incorrect")
+                    self.add_error('email', "Email Is Not Registered")
+            if taken_email:
+                if not authenticate(email=email, password=password):
+                    self.add_error('password', "password is incorrect")

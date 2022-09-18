@@ -28,24 +28,26 @@ class Home(View):
 
 class ProfileCustomisationView(View):
     template_name = 'profile/profile_customisation.html'
-    context_object = {"form": ProfileCustomisationForm()}
 
     def get(self, request, *args, **kwargs):
         accounts_page_name = self.kwargs['username']
         current_account = request.user.username
+        data_of_account = Profile.objects.get(account__username=current_account)
+        form = ProfileCustomisationForm(instance=data_of_account)
         if not accounts_page_name == current_account:
             return redirect(f'/{request.user.username}/')
-        return render(request, self.template_name, self.context_object)
+        return render(request, self.template_name, {'form': form})
 
     def post(self, request, *args, **kwargs):
-        profile = Profile.objects.get(account=request.user)
-        form = ProfileCustomisationForm(request.POST, instance=profile)
+        account_profile = Profile.objects.get(account=request.user)
+        form = ProfileCustomisationForm(request.POST, request.FILES, instance=account_profile)
         if form.is_valid():
-            form.save(commit=False)
-            form.save()
-            return redirect('/')
+            profile = form.save(commit=False)
+            profile.account = request.user
+            profile.save()
+            return redirect(f'/{request.user.username}/')
         else:
-            return render(request, self.template_name, self.context_object)
+            return render(request, self.template_name, {"form": form})
 
 
 class SocialLinkCustomisationView(View):
@@ -74,31 +76,33 @@ class SocialLinkCustomisationView(View):
 
 class SocialLinkUpdateView(View):
     template_name = 'profile/profile_link_edit.html'
-    context_object = {"form": LinkCustomisationForm()}
 
     def get(self, request, *args, **kwargs):
         accounts_page_name = self.kwargs['username']
         current_link_pk = self.kwargs['pk']
         current_account = request.user.username
         existing_pk = SocialLink.objects.filter(pk=current_link_pk).exists()
+        link_pk = SocialLink.objects.get(pk=current_link_pk)
+        form = LinkCustomisationForm(instance=link_pk)
         if accounts_page_name != current_account:
             return redirect(f'/{request.user.username}/')
         elif not existing_pk:
             return redirect(f'/{request.user.username}/')
         else:
-            return render(request, self.template_name, self.context_object)
+            return render(request, self.template_name, {'form': form})
 
     def post(self, request, *args, **kwargs):
         current_link_pk = self.kwargs['pk']
+        accounts_page_name = self.kwargs['username']
         existing_pk = SocialLink.objects.filter(pk=current_link_pk).first()
         form = LinkCustomisationForm(request.POST, instance=existing_pk)
         if form.is_valid():
             social_link_form = form.save(commit=False)
             social_link_form.save()
 
-            return redirect('/')
+            return redirect(f'/{accounts_page_name}/')
         else:
-            return render(request, self.template_name, self.context_object)
+            return render(request, self.template_name, {'form': form})
 
 
 class SocialLinkDeleteView(View):

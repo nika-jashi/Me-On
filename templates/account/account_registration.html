@@ -1,27 +1,23 @@
 {% extends "base.html" %}
 {% block content %}
     <title>Find Me - Registration</title>
-    <div class="centered container custom_card">
+    <div class="center_itself container custom_card">
         <form method="POST">
             {% csrf_token %}
-            <h2>Registration</h2>
-            <div class="centered">
-                <p style="margin: 8px">Email:</p>
+            <div class="centered_items">
+                <h2>Registration</h2>
                 {{ form.email }}
                 {% if form.email.errors %}
                     {{ form.email.errors }}
                 {% endif %}
-                <p style="margin: 8px">Username:</p>
                 {{ form.username }}
                 {% if form.username.errors %}
                     {{ form.username.errors }}
                 {% endif %}
-                <p style="margin: 8px">Password:</p>
                 {{ form.password }}
                 {% if form.password.errors %}
                     {{ form.password.errors }}
                 {% endif %}
-                <p style="margin: 8px">Confirm Password:</p>
                 {{ form.password_confirm }}
                 {% if form.non_field_errors %}
                     <div>{{ form.non_field_errors }}</div>
@@ -31,10 +27,11 @@
                 <button class="regular_button" type="submit">Sign Up</button>
             </div>
         </form>
-    </div>
-    <div class="centered" style="margin: 1%">
-        <small class="text-muted">
-            Already Have An Account? <a class="ml-2" href="{% url 'login' %}">Sign In</a>
-        </small>
+        <div class="center_itself" style="margin: 1%">
+            <small class="text-muted">
+                Already Have An Account? <a class="ml-2" href="{% url 'login' %}">Sign In</a>
+            </small>
+        </div>
+
     </div>
 {% endblock content %}

@@ -1,13 +1,26 @@
-div.centered {
-    text-align: center;
-    margin: 8% 30% 2%;
+div.center_itself {
+    position: absolute;
+    margin: 0;
+    left: 50%;
+    transform: translate(-50%, 25%);
+}
+
+div.centered_items {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .custom_card {
-    border-radius: 20px;
-    background: #e0e0e0;
-    box-shadow: 30px 30px 60px #c3c3c3,
-    -30px -30px 60px #fdfdfd;
+    border-radius: 15px;
+    background: #eeeeee;
+    box-shadow: 15px 15px 30px #c3c3c3,
+    -15px -15px 30px #fdfdfd;
+    box-sizing: border-box;
+    width: 650px;
+    height: 450px;
 }
 
 .container {
@@ -29,7 +42,7 @@ div.centered {
     align-items: center;
     gap: 0.6em;
     font-weight: bold;
-    left: 50%;
+    margin-top: 10px;
 }
 
 .regular_button:hover {
@@ -68,7 +81,8 @@ div.centered {
     text-decoration: none;
     list-style: none;
     text-transform: uppercase;
-    letter-spacing: 8px;
+    letter-spacing: 5px;
+    margin-left: 10px;
     font-size: 14px;
     transition: ease-in-out .2s;
 
@@ -90,11 +104,30 @@ div.centered {
     color: black;
 }
 
-.card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    max-width: 420px;
-    margin-bottom: 5%;
-    margin-left: 2%;
-    margin-top: 3%;
-    text-align: center;
+.text_input {
+    line-height: 28px;
+    border: 2px solid transparent;
+    border-bottom-color: #777;
+    padding: 8px;
+    margin: 5px;
+    outline: none;
+    background-color: transparent;
+    color: #0d0c22;
+    transition: .3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.text_input:focus, .text_input:hover {
+    outline: none;
+    padding: .2rem 1rem;
+    border-radius: 1rem;
+    border-color: #987ac6;
+}
+
+.text_input::placeholder {
+    color: #777;
+}
+
+.text_input:focus::placeholder {
+    opacity: 0;
+    transition: opacity .3s;
 }
