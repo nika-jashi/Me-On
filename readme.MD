@@ -1,4 +1,4 @@
-<h1>Django Project Find Me</h1>
+<h1>Django Project Me-On</h1>
 
 <h3>set up environment for project</h3>
 
