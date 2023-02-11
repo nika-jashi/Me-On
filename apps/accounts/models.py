@@ -38,8 +38,11 @@ class CustomAccountManager(BaseUserManager):
 
 
 class CustomAccount(AbstractUser):
+    """ custom user model with unique identifiers and proper fields. """
     email = models.EmailField(_("email address"), unique=True)
     username = models.CharField(max_length=32, unique=True)
+
+    # First Name And Last Name Is None In Order To Avoid Blank Fields In Database
     first_name = None
     last_name = None
 

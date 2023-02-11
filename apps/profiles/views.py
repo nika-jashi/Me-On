@@ -7,6 +7,8 @@ from apps.profiles.models import Profile, SocialLink
 
 
 class AccountProfileView(View):
+    """ A view for a profile of a current account. """
+
     def get(self, request, *args, **kwargs):
         accounts_page_name = self.kwargs['username']
         accounts_profile_name = CustomAccount.objects.filter(username=accounts_page_name).exists()
@@ -15,6 +17,7 @@ class AccountProfileView(View):
         context = {'accounts_profile': accounts_profile,
                    'accounts_links': accounts_links
                    }
+        # Check If Username Exists In Database (If Exists Profile Should Be Automatically Generated)
         if not accounts_profile_name:
             return redirect('home')
         else:
@@ -22,11 +25,15 @@ class AccountProfileView(View):
 
 
 class Home(View):
+    """ A view for a home page. """
+
     def get(self, request, *args, **kwargs):
         return render(request, 'home/home.html')
 
 
 class ProfileCustomisationView(View):
+    """ A view for a profile customisation of a current account. """
+
     template_name = 'profile/profile_customisation.html'
 
     def get(self, request, *args, **kwargs):
@@ -34,6 +41,7 @@ class ProfileCustomisationView(View):
         current_account = request.user.username
         data_of_account = Profile.objects.get(account__username=current_account)
         form = ProfileCustomisationForm(instance=data_of_account)
+        # Check If Current Account Is Really The Owner Of a Profile
         if not accounts_page_name == current_account:
             return redirect(f'/{request.user.username}/')
         return render(request, self.template_name, {'form': form})

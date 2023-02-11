@@ -6,6 +6,7 @@ from apps.accounts.forms import AccountRegistrationForm, AccountAuthenticationFo
 
 
 class AccountRegistrationView(View):
+    """ A view for creating new users. with proper form and redirection """
     template_name = 'account/account_registration.html'
 
     def get(self, request):
@@ -25,6 +26,7 @@ class AccountRegistrationView(View):
 
 
 class AccountAuthenticationView(View):
+    """ A view for authenticating existing users. with proper form and redirection """
     template_name = 'account/account_login.html'
 
     def get(self, request, *args, **kwargs):
@@ -50,6 +52,7 @@ class AccountAuthenticationView(View):
 
 
 class AccountLogoutView(View):
+    """ A view for authenticated users to log out """
     template_name = 'account/account_logout.html'
 
     def get(self, request):

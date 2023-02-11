@@ -1,19 +1,33 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-    <div class="card">
-        {% if accounts_profile.profile_picture %}
-            <img width="300" height="250" src="{% static accounts_profile.profile_picture.url %}" alt="Profile Picture">
-        {% endif %}
-        <h2><b>{{ accounts_profile.account.username }}</b></h2>
-        <p>Name: {{ accounts_profile.full_name }}</p>
-        <p>Bio: {{ accounts_profile.small_bio }}</p>
+    <div style="width: 30%; float:left">
+        <div class="card">
+            {% if accounts_profile.profile_picture %}
+                <img width="300" height="250" src="{% static accounts_profile.profile_picture.url %}"
+                     alt="Profile Picture">
+            {% endif %}
+            <h2><b>{{ accounts_profile.account.username }}</b></h2>
+            <p>Name: {{ accounts_profile.full_name }}</p>
+            <p>Bio: {{ accounts_profile.small_bio }}</p>
+
+        </div>
+        <div>
+            {% if user.username == accounts_profile.account.username %}
+                <a href="edit-profile/">
+                    <button class="regular_button"> Edit Profile</button>
+                </a>
+                <a href="add-link/">
+                    <button class="regular_button"> Add Link To Your Account</button>
+                </a>
+            {% endif %}
+        </div>
     </div>
     <h3>Social Media Links</h3>
-    <div>
+    <div style="width: 70%; float:right">
         {% for item in accounts_links.values_list %}
             <a target="_blank" href="{{ item.2 }}">
-                <button class="button_link"> {{ item.1 }} </button>
+                <button class=""> {{ item.1 }} </button>
             </a>
             {% if user.username == accounts_profile.account.username %}
                 <a href="edit-link/{{ item.0 }}">
@@ -23,17 +37,6 @@
                     <button class="button_link">Delete</button>
                 </a>
             {% endif %}
-            <br>
+            </div>
         {% endfor %}
-    </div>
-    <div>
-        {% if user.username == accounts_profile.account.username %}
-            <a href="edit-profile/">
-                <button class="button_link"> Edit Profile</button>
-            </a>
-            <a href="add-link/">
-                <button class="button_link"> Add Link To Your Account</button>
-            </a>
-        {% endif %}
-    </div>
 {% endblock content %}

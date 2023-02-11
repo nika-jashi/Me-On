@@ -1,10 +1,10 @@
-from PIL import Image
 from django.db import models
 
 from apps.accounts.models import CustomAccount
 
 
 class SocialLink(models.Model):
+    """ Model for saving URLs for account. """
     name = models.CharField(max_length=54)
     link = models.URLField(max_length=1000)
     link_owner = models.ForeignKey(to=CustomAccount, on_delete=models.CASCADE)
@@ -14,6 +14,7 @@ class SocialLink(models.Model):
 
 
 class Profile(models.Model):
+    """ Profile for account with extra fields to customise. """
     account = models.OneToOneField(to=CustomAccount, on_delete=models.CASCADE)
     full_name = models.CharField(max_length=54, blank=True)
     small_bio = models.TextField(max_length=140, blank=True)

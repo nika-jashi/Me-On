@@ -6,6 +6,8 @@ from apps.profiles.models import Profile, SocialLink
 
 
 class ProfileCustomisationForm(forms.ModelForm):
+    """ A form for customising profile of current account. Includes all the required
+    fields. """
     small_bio = forms.CharField(max_length=140, help_text="Piece Of Information About You",
                                 widget=forms.Textarea(attrs={'class': 'text_input'}),
                                 required=False)
@@ -19,6 +21,8 @@ class ProfileCustomisationForm(forms.ModelForm):
 
 
 class LinkCustomisationForm(forms.ModelForm):
+    """ A form for adding and/or customising URLs of current account. Includes all the required
+    fields. """
     name = forms.CharField(
         max_length=54,
         help_text="Input Name Of The Site Or Indicator For URL", widget=forms.TextInput(attrs={'class': 'text_input'}))
@@ -31,5 +35,6 @@ class LinkCustomisationForm(forms.ModelForm):
 
     def clean(self):
         name = self.cleaned_data['name']
+        # Check If Name Of The URL Does Not Contain Invalid Symbols
         if not re.search(r'([\w !#%()-=&~])', name):
             raise forms.ValidationError('Please Provide Valid Name (Description)')
